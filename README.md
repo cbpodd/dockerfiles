@@ -9,4 +9,4 @@ Only Docker is required to use this repository.
 
 ## Repositories
 
-[PostgreSQL](postgres/README.md)
+[PostgreSQL](postgresql/README.md)
