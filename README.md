@@ -6,3 +6,7 @@ docker, as well as explanations for their use.
 ## Installation
 
 Only Docker is required to use this repository.
+
+## Repositories
+
+[PostgreSQL](postgres/README.md)
