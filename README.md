@@ -9,6 +9,6 @@ Only Docker is required to use this repository.
 
 ## Docker commands
 
-[PostgreSQL](postgresql)
-[Maven](maven)
+[PostgreSQL](postgresql) \
+[Maven](maven) \
 [Latex (pdflatex only)](latex)
