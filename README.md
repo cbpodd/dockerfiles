@@ -7,6 +7,8 @@ docker, as well as explanations for their use.
 
 Only Docker is required to use this repository.
 
-## Repositories
+## Docker commands
 
 [PostgreSQL](postgresql)
+[Maven](maven)
+[Latex (pdflatex only)](latex)
