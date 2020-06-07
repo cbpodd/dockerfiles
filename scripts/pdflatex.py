@@ -10,11 +10,9 @@ LATEX_CC = 'pdflatex'
 def main():
     commandArray = list()
     commandArray.append("docker run --rm -i") # Command and some parameters
-    userGroupTemplate = Template('--user=$user:$group') # Pass in user and group
-    commandArray.append(userGroupTemplate.substitute(user=os.geteuid(), group=os.getegid()))
     commandArray.append("--net=none -v") # More parameters
     pwdTemplate = Template('$PWD:/data') # Present working directory
-    commandArray.append(pwdTemplate.substitute(PWD=os.getcwd()))
+    commandArray.append(pwdTemplate.substitute(PWD=getpwd()))
     commandArray.append(IMAGE) # Pull the requested docker image
 
     commandArray.append(LATEX_CC) # Pass in chosen latex compiler
@@ -23,6 +21,17 @@ def main():
     # Run the command
     return os.system(' '.join(commandArray))
 
+def getpwd():
+    cwd = os.getcwd()
+    if sys.platform.startswith('win32'):
+        cwdArray = cwd.split('\\')
+        outArray = ['/']
+        driveLetter = cwdArray[0][0].lower()
+        outArray.append(driveLetter)
+        outArray.extend(cwdArray[1:])
+        return '/'.join(outArray)
+    return cwd
+ 
 if __name__ == "__main__":
     exit_code = main()
     sys.exit(exit_code)

@@ -12,7 +12,7 @@ def main():
     commandArray.append("docker run --rm -i") # Command and some parameters
     # commandArray.append("--net=none") # More parameters
     pwdTemplate = Template('-v $PWD:/usr/repos/maven') # Present working directory
-    commandArray.append(pwdTemplate.substitute(PWD=os.getcwd()))
+    commandArray.append(pwdTemplate.substitute(PWD=getpwd()))
     commandArray.append('-w /usr/repos/maven') # Present working directory
     commandArray.append(IMAGE) # Pull the requested docker image
 
@@ -22,6 +22,17 @@ def main():
     # Run the command
     return os.system(' '.join(commandArray))
 
+def getpwd():
+    cwd = os.getcwd()
+    if sys.platform.startswith('win32'):
+        cwdArray = cwd.split('\\')
+        outArray = ['/']
+        driveLetter = cwdArray[0][0].lower()
+        outArray.append(driveLetter)
+        outArray.extend(cwdArray[1:])
+        return '/'.join(outArray)
+    return cwd
+ 
 if __name__ == "__main__":
     exit_code = main()
     sys.exit(exit_code)
